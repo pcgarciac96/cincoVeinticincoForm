@@ -1,1 +1,69 @@
-<p>contact-form works!</p>
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <label>Sexo*</label>
+    <select formControlName="sexo">
+      <option value="">Seleccione</option>
+      <option value="M">Masculino</option>
+      <option value="F">Femenino</option>
+    </select>
+    <div *ngIf="contactForm.get('sexo')?.invalid && contactForm.get('sexo')?.touched">
+      <p>Campo obligatorio</p>
+    </div>
+  
+    <label>Fecha de Nacimiento*</label>
+    <input type="date" formControlName="birthdate">
+    <div *ngIf="contactForm.get('birthdate')?.errors?.['minor']">
+        <p>Debe ser mayor de 18 años</p>
+    </div>
+  
+    <label>Nombre*</label>
+    <input type="text" formControlName="nombre">
+    <div *ngIf="contactForm.get('nombre')?.invalid && contactForm.get('nombre')?.touched">
+      <p>Campo obligatorio</p>
+    </div>
+  
+    <label>Apellido*</label>
+    <input type="text" formControlName="apellido">
+    <div *ngIf="contactForm.get('apellido')?.invalid && contactForm.get('apellido')?.touched">
+      <p>Campo obligatorio</p>
+    </div>
+  
+    <label>Email*</label>
+    <input type="email" formControlName="email">
+    <div *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">
+      <p>Ingrese un email válido</p>
+    </div>
+  
+    <label>Dirección*</label>
+    <input type="text" formControlName="direccion">
+    <div *ngIf="contactForm.get('direccion')?.invalid && contactForm.get('direccion')?.touched">
+      <p>Campo obligatorio</p>
+    </div>
+  
+    <label>País*</label>
+    <select formControlName="pais">
+      <option value="">Seleccione</option>
+      <option *ngFor="let country of countries">{{ country }}</option>
+    </select>
+    <div *ngIf="contactForm.get('pais')?.invalid && contactForm.get('pais')?.touched">
+      <p>Campo obligatorio</p>
+    </div>
+  
+    <div *ngIf="contactForm.get('pais')?.value === 'Colombia'">
+      <label>Departamento*</label>
+      <select formControlName="departamento">
+        <option value="">Seleccione</option>
+        <option *ngFor="let department of departments">{{ department }}</option>
+      </select>
+      <div *ngIf="contactForm.get('departamento')?.invalid && contactForm.get('departamento')?.touched">
+        <p>Campo obligatorio</p>
+      </div>
+    </div>
+  
+    <label>Ciudad</label>
+    <input type="text" formControlName="ciudad">
+  
+    <label>Comentarios</label>
+    <textarea formControlName="comentarios"></textarea>
+  
+    <button type="submit" [disabled]="contactForm.invalid">Enviar</button>
+  </form>
