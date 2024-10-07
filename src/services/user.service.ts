@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { User } from '../app/models/user.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,17 +15,17 @@ export class UserService {
 
   constructor() {}
 
-  setUsers(fetchedUsers: any[]) {
+  setUsers(fetchedUsers: User[]) {
     const currentUsers = this.usersSubject.value;
   
     const newUsers = fetchedUsers.filter(fetchedUser => 
-      !currentUsers.some(currentUser => currentUser.id === fetchedUser.id) // Asumiendo que cada usuario tiene un ID único
+      !currentUsers.some(currentUser => currentUser.id === fetchedUser.id)
     );
   
     this.usersSubject.next([...currentUsers, ...newUsers]);
   }
 
-  addUser(newUser: any) {
+  addUser(newUser: User) {
     const currentUsers = this.usersSubject.value;
     this.usersSubject.next([...currentUsers, newUser]);
   }
@@ -32,13 +34,13 @@ export class UserService {
     return this.usersSubject.value;
   }
 
-  updateUser(index: number, updatedUser: any) {
+  updateUser(index: number, updatedUser: User) {
     const currentUsers = this.usersSubject.getValue();
     currentUsers[index] = updatedUser;
     this.usersSubject.next(currentUsers);
   }
 
-  setEditUser(user: any) {
+  setEditUser(user: User) {
     this.editUserSubject.next(user);
   }
 

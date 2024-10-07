@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
-import { log } from 'console';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-contact-form',
@@ -67,7 +67,7 @@ export class ContactFormComponent {
       return;
     }
   
-    const user = this.contactForm.value;
+    const user:User = this.contactForm.value;
   
     if (this.isEditing) {
       const index = this.userService.getUsers().findIndex(u => u.email === user.email);

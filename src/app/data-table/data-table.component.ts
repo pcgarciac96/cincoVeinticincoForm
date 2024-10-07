@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { User } from '../models/user.model';
+
 @Component({
   selector: 'app-data-table',
   standalone: true,
@@ -12,8 +14,8 @@ import { UserService } from '../../services/user.service';
   styleUrl: './data-table.component.css'
 })
 export class DataTableComponent {
-  users: any[] = [];
-  filteredUsers: any[] = [];
+  users: User[] = [];
+  filteredUsers: User[] = [];
   sortDirection: 'asc' | 'desc' = 'asc';
   sortColumn: string = 'name';
   filterTerm: string = '';
@@ -64,7 +66,7 @@ export class DataTableComponent {
     );
   }
 
-  sortUsers(column: string) {
+  sortUsers(column: keyof User) {
     if (this.sortColumn === column) {
       this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
     } else {
@@ -73,8 +75,8 @@ export class DataTableComponent {
     this.sortColumn = column;
 
     this.filteredUsers.sort((a, b) => {
-      const valueA = a[column].toLowerCase();
-      const valueB = b[column].toLowerCase();
+      const valueA = a[column] as string;
+      const valueB = b[column] as string;
 
       if (valueA < valueB) {
         return this.sortDirection === 'asc' ? -1 : 1;
@@ -86,7 +88,7 @@ export class DataTableComponent {
     });
   }
 
-  editUser(user: any) {
+  editUser(user: User) {
   this.userService.setEditUser(user);
   
   this.router.navigate(['/contact-form'], { state: { user } });
