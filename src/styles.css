@@ -1,1 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    background-image: url('https://s1.significados.com/foto/paisaje-og.jpg');
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+}

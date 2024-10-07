@@ -1,69 +1,100 @@
-<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-    <label>Sexo*</label>
-    <select formControlName="sex">
-      <option value="">Seleccione</option>
-      <option value="M">Masculino</option>
-      <option value="F">Femenino</option>
-    </select>
-    <div *ngIf="contactForm.get('sex')?.invalid && contactForm.get('sex')?.touched">
-      <p>Campo obligatorio</p>
+<div class="container">
+
+
+<div class="form-container">
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <div class="info-column">
+      <p>Aquí puedes agregar información adicional o instrucciones.</p>
     </div>
-  
-    <label>Fecha de Nacimiento*</label>
-    <input type="date" formControlName="date_birthday">
-    <div *ngIf="contactForm.get('date_birthday')?.errors?.['minor']">
-        <p>Debe ser mayor de 18 años</p>
+
+    <div class="data-column">
+    <div>
+      <h3>Contacto</h3>
     </div>
-  
-    <label>Nombre*</label>
-    <input type="text" formControlName="name">
-    <div *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched">
-      <p>Campo obligatorio</p>
-    </div>
-  
-    <label>Apellido*</label>
-    <input type="text" formControlName="last_name">
-    <div *ngIf="contactForm.get('last_name')?.invalid && contactForm.get('last_name')?.touched">
-      <p>Campo obligatorio</p>
-    </div>
-  
-    <label>Email*</label>
-    <input type="email" formControlName="email">
-    <div *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">
-      <p>Ingrese un email válido</p>
-    </div>
-  
-    <label>Dirección*</label>
-    <input type="text" formControlName="address">
-    <div *ngIf="contactForm.get('address')?.invalid && contactForm.get('address')?.touched">
-      <p>Campo obligatorio</p>
-    </div>
-  
-    <label>País*</label>
-    <select formControlName="country">
-      <option value="">Seleccione</option>
-      <option *ngFor="let country of countries">{{ country }}</option>
-    </select>
-    <div *ngIf="contactForm.get('country')?.invalid && contactForm.get('country')?.touched">
-      <p>Campo obligatorio</p>
-    </div>
-  
-    <div *ngIf="contactForm.get('country')?.value === 'Colombia'">
-      <label>Departamento*</label>
-      <select formControlName="department">
-        <option value="">Seleccione</option>
-        <option *ngFor="let department of departments">{{ department }}</option>
-      </select>
-      <div *ngIf="contactForm.get('department')?.invalid && contactForm.get('department')?.touched">
-        <p>Campo obligatorio</p>
+      <div class="input-group">
+        <div class="input-item">
+          <select formControlName="sex">
+            <option value="">Seleccione Sexo*</option>
+            <option value="M">Masculino</option>
+            <option value="F">Femenino</option>
+          </select>
+          <div *ngIf="contactForm.get('sex')?.invalid && contactForm.get('sex')?.touched">
+            <p>Campo obligatorio</p>
+          </div>
+        </div>
+        <div class="input-item">
+          <input type="date" formControlName="date_birthday" placeholder="Fecha de Nacimiento*">
+          <div *ngIf="contactForm.get('date_birthday')?.errors?.['minor']">
+            <p>Debe ser mayor de 18 años</p>
+          </div>
+        </div>
       </div>
+      <div class="input-group">
+        <div class="input-item">
+          <input type="text" formControlName="name" placeholder="Nombre*">
+          <div *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched">
+            <p>Campo obligatorio</p>
+          </div>
+        </div>
+        <div class="input-item">
+          <input type="text" formControlName="last_name" placeholder="Apellido*">
+          <div *ngIf="contactForm.get('last_name')?.invalid && contactForm.get('last_name')?.touched">
+            <p>Campo obligatorio</p>
+          </div>
+        </div>
+      </div>
+      <div class="input-group">
+        <input type="email" formControlName="email" placeholder="Email*">
+        <div *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">
+          <p>IFngrese un email válido</p>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <input type="text" formControlName="address" placeholder="Dirección*">
+        <div *ngIf="contactForm.get('address')?.invalid && contactForm.get('address')?.touched">
+          <p>Campo obligatorio</p>
+        </div>
+      </div>
+      <div class="input-group">
+        <div class="input-item">
+          <input type="text" formControlName="apartment" placeholder="Casa/Apto (opcional)">
+        </div>
+        <div class="input-item">
+          <select formControlName="country">
+            <option value="">Seleccione País*</option>
+            <option *ngFor="let country of countries">{{ country }}</option>
+          </select>
+          <div *ngIf="contactForm.get('country')?.invalid && contactForm.get('country')?.touched">
+            <p>Campo obligatorio</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-group" *ngIf="contactForm.get('country')?.value === 'Colombia'">
+        <select formControlName="department">
+          <option value="">Seleccione Departamento*</option>
+          <option *ngFor="let department of departments">{{ department }}</option>
+        </select>
+        <div *ngIf="contactForm.get('department')?.invalid && contactForm.get('department')?.touched">
+          <p>Campo obligatorio</p>
+        </div>
+      </div>
+      <div class="input-group">
+
+        <input type="text" formControlName="city" placeholder="Ciudad*">
+        <div *ngIf="contactForm.get('city')?.invalid && contactForm.get('city')?.touched">
+          <p>Campo obligatorio</p>
+        </div>
+      </div>
+      <div class="input-group">
+        <textarea formControlName="comment" placeholder="Comentarios*"></textarea>
+        <div *ngIf="contactForm.get('comment')?.invalid && contactForm.get('comment')?.touched">
+          <p>Campo obligatorio</p>
+        </div>
+      </div>
+      <button type="submit" [disabled]="contactForm.invalid">Enviar</button>
     </div>
-  
-    <label>Ciudad</label>
-    <input type="text" formControlName="city">
-  
-    <label>Comentarios</label>
-    <textarea formControlName="comment"></textarea>
-  
-    <button type="submit" [disabled]="contactForm.invalid">Enviar</button>
   </form>
+</div>
+</div>

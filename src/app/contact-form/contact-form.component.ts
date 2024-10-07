@@ -32,8 +32,9 @@ export class ContactFormComponent {
       address: ['', Validators.required],
       country: ['', Validators.required],
       department: [''],
-      city: [''],
-      comment: ['']
+      city: ['', Validators.required],
+      apartment: [''],
+      comment: ['', Validators.required]
     });
 
     this.userService.editUser$.subscribe(user => {
