@@ -1,29 +1,29 @@
 <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
     <label>Sexo*</label>
-    <select formControlName="sexo">
+    <select formControlName="sex">
       <option value="">Seleccione</option>
       <option value="M">Masculino</option>
       <option value="F">Femenino</option>
     </select>
-    <div *ngIf="contactForm.get('sexo')?.invalid && contactForm.get('sexo')?.touched">
+    <div *ngIf="contactForm.get('sex')?.invalid && contactForm.get('sex')?.touched">
       <p>Campo obligatorio</p>
     </div>
   
     <label>Fecha de Nacimiento*</label>
-    <input type="date" formControlName="birthdate">
-    <div *ngIf="contactForm.get('birthdate')?.errors?.['minor']">
+    <input type="date" formControlName="date_birthday">
+    <div *ngIf="contactForm.get('date_birthday')?.errors?.['minor']">
         <p>Debe ser mayor de 18 años</p>
     </div>
   
     <label>Nombre*</label>
-    <input type="text" formControlName="nombre">
-    <div *ngIf="contactForm.get('nombre')?.invalid && contactForm.get('nombre')?.touched">
+    <input type="text" formControlName="name">
+    <div *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched">
       <p>Campo obligatorio</p>
     </div>
   
     <label>Apellido*</label>
-    <input type="text" formControlName="apellido">
-    <div *ngIf="contactForm.get('apellido')?.invalid && contactForm.get('apellido')?.touched">
+    <input type="text" formControlName="last_name">
+    <div *ngIf="contactForm.get('last_name')?.invalid && contactForm.get('last_name')?.touched">
       <p>Campo obligatorio</p>
     </div>
   
@@ -34,23 +34,23 @@
     </div>
   
     <label>Dirección*</label>
-    <input type="text" formControlName="direccion">
-    <div *ngIf="contactForm.get('direccion')?.invalid && contactForm.get('direccion')?.touched">
+    <input type="text" formControlName="addres">
+    <div *ngIf="contactForm.get('addres')?.invalid && contactForm.get('addres')?.touched">
       <p>Campo obligatorio</p>
     </div>
   
     <label>País*</label>
-    <select formControlName="pais">
+    <select formControlName="country">
       <option value="">Seleccione</option>
       <option *ngFor="let country of countries">{{ country }}</option>
     </select>
-    <div *ngIf="contactForm.get('pais')?.invalid && contactForm.get('pais')?.touched">
+    <div *ngIf="contactForm.get('country')?.invalid && contactForm.get('country')?.touched">
       <p>Campo obligatorio</p>
     </div>
   
-    <div *ngIf="contactForm.get('pais')?.value === 'Colombia'">
+    <div *ngIf="contactForm.get('country')?.value === 'Colombia'">
       <label>Departamento*</label>
-      <select formControlName="departamento">
+      <select formControlName="department">
         <option value="">Seleccione</option>
         <option *ngFor="let department of departments">{{ department }}</option>
       </select>
@@ -60,10 +60,10 @@
     </div>
   
     <label>Ciudad</label>
-    <input type="text" formControlName="ciudad">
+    <input type="text" formControlName="city">
   
     <label>Comentarios</label>
-    <textarea formControlName="comentarios"></textarea>
+    <textarea formControlName="comment"></textarea>
   
     <button type="submit" [disabled]="contactForm.invalid">Enviar</button>
   </form>

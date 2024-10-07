@@ -21,33 +21,33 @@ export class ContactFormComponent {
 
   ngOnInit(): void {
     this.contactForm = this.fb.group({
-      sexo: ['', Validators.required],
-      birthdate: ['', [Validators.required, this.validateAge]],
-      nombre: ['', Validators.required],
-      apellido: ['', Validators.required],
+      sex: ['', Validators.required],
+      date_birthday	: ['', [Validators.required, this.validateAge]],
+      name: ['', Validators.required],
+      last_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      direccion: ['', Validators.required],
-      pais: ['', Validators.required],
-      departamento: [''],
-      ciudad: [''],
-      comentarios: ['']
+      addres: ['', Validators.required],
+      country: ['', Validators.required],
+      department: [''],
+      city: [''],
+      comment: ['']
     });
 
     // Detectar cambio en país
-    this.contactForm.get('pais')?.valueChanges.subscribe(value => {
+    this.contactForm.get('country')?.valueChanges.subscribe(value => {
       if (value === 'Colombia') {
-        this.contactForm.get('departamento')?.setValidators([Validators.required]);
+        this.contactForm.get('department')?.setValidators([Validators.required]);
       } else {
-        this.contactForm.get('departamento')?.clearValidators();
+        this.contactForm.get('department')?.clearValidators();
       }
-      this.contactForm.get('departamento')?.updateValueAndValidity();
+      this.contactForm.get('department')?.updateValueAndValidity();
     });
   }
 
   // Valida si el usuario tiene 18 años o más
   validateAge(control: AbstractControl) {
-    const birthdate = new Date(control.value);
-    const age = new Date().getFullYear() - birthdate.getFullYear();
+    const date_birthday	= new Date(control.value);
+    const age = new Date().getFullYear() - date_birthday.getFullYear();
     return age >= 18 ? null : { minor: true };
   }
 
@@ -55,10 +55,8 @@ export class ContactFormComponent {
     if (this.contactForm.invalid) {
       return;
     }
-
-    const formValues = this.contactForm.value;
     alert('Formulario enviado correctamente');
-    // Aquí puedes agregar el código para enviar los datos a la tabla
-    this.router.navigate(['/data-table']); 
+
+    this.router.navigate(['/data-table']);
   }
 }

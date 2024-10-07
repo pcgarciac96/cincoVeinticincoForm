@@ -1,21 +1,20 @@
 <table border="1">
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Email</th>
-        <th>País</th>
-        <th>Ciudad</th>
-        <th>Comentarios</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users">
-        <td>{{ user.nombre }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.pais }}</td>
-        <td>{{ user.ciudad }}</td>
-        <td>{{ user.comentarios }}</td>
-      </tr>
-    </tbody>
-  </table>
-  
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Email</th>
+      <th>País</th>
+      <th>Ciudad</th>
+      <th>Comentarios</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.name }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.country }}</td>
+      <td>{{ user.City }}</td> 
+      <td>{{ user.comment }}</td>
+    </tr>
+  </tbody>
+</table>

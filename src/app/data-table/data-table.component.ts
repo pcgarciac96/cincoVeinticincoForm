@@ -16,14 +16,21 @@ export class DataTableComponent {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-  this.http.get<any[]>('https://cincoeventicinco.com/users.json', { withCredentials: true }).subscribe(
-    data => {
-      this.users = data;
-    },
-    error => {
-      console.error('Error:', error);
-    }
-  );
+    this.http.get<any>('https://cincoveinticinco.com/users.json').subscribe({
+      next: (data) => {
+        console.log(data);
+        this.users = data.users || [];
+      },
+      error: (err) => {
+        console.error('Error fetching users:', err);
+      },
+      complete: () => {
+        console.log('Request completed');
+      }
+    });
+  }
+  
+  
 }
 
-}
+
