@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service'; // Asegúrate de importar el servicio
 
 @Component({
   selector: 'app-contact-form',
@@ -15,14 +16,13 @@ export class ContactFormComponent {
   contactForm!: FormGroup;
   countries = ['Colombia', 'Argentina', 'México'];
   departments = ['Cundinamarca', 'Antioquia', 'Valle del Cauca']; // Solo para Colombia
-  isMinor = false;
 
-  constructor(private fb: FormBuilder, private router: Router) { }
+  constructor(private fb: FormBuilder, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
     this.contactForm = this.fb.group({
       sex: ['', Validators.required],
-      date_birthday	: ['', [Validators.required, this.validateAge]],
+      date_birthday: ['', [Validators.required, this.validateAge]],
       name: ['', Validators.required],
       last_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -44,9 +44,8 @@ export class ContactFormComponent {
     });
   }
 
-  // Valida si el usuario tiene 18 años o más
   validateAge(control: AbstractControl) {
-    const date_birthday	= new Date(control.value);
+    const date_birthday = new Date(control.value);
     const age = new Date().getFullYear() - date_birthday.getFullYear();
     return age >= 18 ? null : { minor: true };
   }
@@ -55,7 +54,12 @@ export class ContactFormComponent {
     if (this.contactForm.invalid) {
       return;
     }
-    alert('Formulario enviado correctamente');
+
+    const newUser = this.contactForm.value;
+
+    this.userService.addUser(newUser);
+
+    alert('Usuario agregado correctamente');
 
     this.router.navigate(['/data-table']);
   }
