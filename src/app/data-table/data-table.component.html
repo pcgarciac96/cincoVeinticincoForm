@@ -1,20 +1,26 @@
+<input type="text" [(ngModel)]="filterTerm" (ngModelChange)="filterUsers()" placeholder="Buscar...">
+
 <table border="1">
   <thead>
     <tr>
-      <th>Nombre</th>
-      <th>Email</th>
-      <th>País</th>
-      <th>Ciudad</th>
+      <th (click)="sortUsers('name')">Nombre</th>
+      <th (click)="sortUsers('email')">Email</th>
+      <th (click)="sortUsers('country')">País</th>
+      <th (click)="sortUsers('city')">Ciudad</th>
       <th>Comentarios</th>
+      <th>Acciones</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let user of users">
+    <tr *ngFor="let user of filteredUsers">
       <td>{{ user.name }}</td>
       <td>{{ user.email }}</td>
       <td>{{ user.country }}</td>
-      <td>{{ user.City }}</td> 
+      <td>{{ user.city }}</td>
       <td>{{ user.comment }}</td>
+      <td>
+        <button (click)="editUser(user)">Editar</button>
+      </td>
     </tr>
   </tbody>
 </table>

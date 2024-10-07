@@ -34,8 +34,8 @@
     </div>
   
     <label>Dirección*</label>
-    <input type="text" formControlName="addres">
-    <div *ngIf="contactForm.get('addres')?.invalid && contactForm.get('addres')?.touched">
+    <input type="text" formControlName="address">
+    <div *ngIf="contactForm.get('address')?.invalid && contactForm.get('address')?.touched">
       <p>Campo obligatorio</p>
     </div>
   
@@ -54,7 +54,7 @@
         <option value="">Seleccione</option>
         <option *ngFor="let department of departments">{{ department }}</option>
       </select>
-      <div *ngIf="contactForm.get('departamento')?.invalid && contactForm.get('departamento')?.touched">
+      <div *ngIf="contactForm.get('department')?.invalid && contactForm.get('department')?.touched">
         <p>Campo obligatorio</p>
       </div>
     </div>
