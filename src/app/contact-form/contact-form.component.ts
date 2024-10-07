@@ -5,11 +5,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../models/user.model';
+import { ContactInfoComponent } from '../contact-info/contact-info.component';
+
 
 @Component({
   selector: 'app-contact-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, ContactInfoComponent],
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.css']
 })
